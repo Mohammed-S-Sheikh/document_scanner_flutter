@@ -116,7 +116,7 @@ class _PdfGeneratotGalleryState extends State<PdfGeneratotGallery> {
       appBar: appBar,
       body: Stack(
         children: [
-          (files.isEmpty)
+          files.isEmpty
               ? Center(
                   child: Text(widget.labelsConfig[
                           ScannerLabelsConfig.PDF_GALLERY_EMPTY_MESSAGE] ??
@@ -200,33 +200,39 @@ class _PdfGeneratotGalleryState extends State<PdfGeneratotGallery> {
                 children: [
                   if (files.isNotEmpty)
                     Expanded(
-                        child: _mainControl(context,
-                            color: Colors.blue,
-                            icon: Icons.check,
-                            title: widget.labelsConfig[ScannerLabelsConfig
-                                    .PDF_GALLERY_DONE_LABEL] ??
-                                "Done",
-                            textColor: Colors.white,
-                            onTap: onDone,
-                            radius: BorderRadius.only(
-                                topLeft: Radius.circular(25),
-                                bottomLeft: Radius.circular(25)))),
+                      child: _mainControl(
+                        context,
+                        color: Colors.blue,
+                        icon: Icons.check,
+                        title: widget.labelsConfig[
+                                ScannerLabelsConfig.PDF_GALLERY_DONE_LABEL] ??
+                            "Done",
+                        textColor: Colors.white,
+                        onTap: onDone,
+                        radius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          bottomLeft: Radius.circular(25),
+                        ),
+                      ),
+                    ),
                   Expanded(
-                      child: _mainControl(context,
-                          color:
-                              files.isEmpty ? Colors.blue : Colors.cyanAccent,
-                          icon: Icons.add_a_photo,
-                          textColor:
-                              files.isEmpty ? Colors.white : Colors.black,
-                          title: widget.labelsConfig[ScannerLabelsConfig
-                                  .PDF_GALLERY_ADD_IMAGE_LABEL] ??
-                              "Add Image",
-                          onTap: addImage,
-                          radius: files.isEmpty
-                              ? BorderRadius.circular(25)
-                              : BorderRadius.only(
-                                  topRight: Radius.circular(25),
-                                  bottomRight: Radius.circular(25)))),
+                    child: _mainControl(
+                      context,
+                      color: files.isEmpty ? Colors.blue : Colors.cyanAccent,
+                      icon: Icons.add_a_photo,
+                      textColor: files.isEmpty ? Colors.white : Colors.black,
+                      title: widget.labelsConfig[ScannerLabelsConfig
+                              .PDF_GALLERY_ADD_IMAGE_LABEL] ??
+                          "Add Image",
+                      onTap: addImage,
+                      radius: files.isEmpty
+                          ? BorderRadius.circular(25)
+                          : BorderRadius.only(
+                              topRight: Radius.circular(25),
+                              bottomRight: Radius.circular(25),
+                            ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -236,29 +242,32 @@ class _PdfGeneratotGalleryState extends State<PdfGeneratotGallery> {
     );
   }
 
-  Widget _mainControl(BuildContext context,
-          {required String title,
-          required Function onTap,
-          required Color color,
-          IconData? icon,
-          Color textColor = Colors.black,
-          required BorderRadius radius}) =>
+  Widget _mainControl(
+    BuildContext context, {
+    required String title,
+    required Function onTap,
+    required Color color,
+    IconData? icon,
+    Color textColor = Colors.black,
+    required BorderRadius radius,
+  }) =>
       GestureDetector(
         onTap: () => onTap(),
         child: Container(
-            decoration: BoxDecoration(borderRadius: radius, color: color),
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (icon != null)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Icon(icon, size: 20, color: textColor),
-                  ),
-                Text(title, style: TextStyle(color: textColor))
-              ],
-            ),
-            alignment: Alignment.center),
+          decoration: BoxDecoration(borderRadius: radius, color: color),
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (icon != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Icon(icon, size: 20, color: textColor),
+                ),
+              Text(title, style: TextStyle(color: textColor))
+            ],
+          ),
+          alignment: Alignment.center,
+        ),
       );
 }
